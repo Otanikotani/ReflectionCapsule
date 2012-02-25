@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE poco-application-context SYSTEM "http://www.pocomatic.com/poco-application-context.dtd">
+
+<poco-application-context>
+	<bean id="beanExample" class="BeanExample" lazy-init="false" destroy-method="delete">
+		<ioc method="test"/>
+	</bean>
+</poco-application-context>
