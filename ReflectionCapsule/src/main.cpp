@@ -4,6 +4,9 @@
  @date     Feb 25, 2012
  @brief    Reflection capsule
  */
+#include <sys/time.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #include <iostream>
 
@@ -30,18 +33,30 @@ initContext(const char *ctx_string)
     return (context);
 }
 
-int main() {
-    std::cout << "Hi" << std::endl;
-
-    POCO_AppEnv* environment = new POCO_AppEnv;
-    POCO_AppContext::setDefaultAppEnv(environment);
-    POCO_AppContext* context = NULL;
-
-    context = initContext(contextString);
-    if (NULL == context)
+int
+main()
+{
+    struct timeval start, end;
+    long mtime, seconds, useconds;
+    gettimeofday(&start, NULL);
+    for (int counter = 0; counter < 1; ++counter)
     {
-        std::cout << "ApplicationBeans is not set in system configuration" << std::endl;
-        return (-1);
+        POCO_AppContext* context = NULL;
+
+        context = initContext(contextString);
+        if (NULL == context)
+        {
+            std::cout << "ApplicationBeans is not set in system configuration"
+                    << std::endl;
+            return (-1);
+        }
+        context->initSingletons();
+        context->terminate();
+        context->destroy();
     }
-    context->initSingletons(environment);
+    gettimeofday(&end, NULL);
+    seconds = end.tv_sec - start.tv_sec;
+    useconds = end.tv_usec - start.tv_usec;
+    mtime = ((seconds) * 1000 + useconds / 1000.0) + 0.5;
+    printf("Elapsed time: %ld milliseconds\n", mtime);
 }

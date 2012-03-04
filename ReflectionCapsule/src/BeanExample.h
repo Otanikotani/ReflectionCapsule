@@ -20,7 +20,7 @@ public:
     void
     test()
     {
-        std::cout << "Test method called" << std::endl;
+//        std::cout << "Test method called" << std::endl;
     }
 };
 
