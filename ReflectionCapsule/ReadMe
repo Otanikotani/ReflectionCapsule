@@ -1,0 +1,11 @@
+WIDELY used strcmp's even for booleans like isSingleton, isAbstract. Optimizable.
+Fix all these continues and returns.
+
+
+
+Optimization results of simple one bean initing-tearing 1000000 times:
+-O0 Elapsed time: 30330 milliseconds
+-O1 Elapsed time: 19203 milliseconds
+-O2 Elapsed time: 14998 milliseconds
+-O3 Elapsed time: 14791 milliseconds (2x times!)
+-Os Elapsed time: 19176 milliseconds
