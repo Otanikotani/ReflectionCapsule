@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 
+#include <string>
 #include <vector>
 
 #include <iostream>
@@ -37,14 +38,22 @@
 struct POCO_ProxyDesc
 {
     int kind;
-    POCO_String bean_class_ptr;
-    POCO_String factory_class_ptr;
-    POCO_String signature;
+    std::string bean_class_ptr;
+    std::string factory_class_ptr;
+    std::string signature;
     POCO_proxy_t proxy;
-    POCO_String filename;
-    POCO_String proxy_name;
+    std::string filename;
+    std::string proxy_name;
 
-    POCO_String key;
+    std::string key;
+//    POCO_String bean_class_ptr;
+//    POCO_String factory_class_ptr;
+//    POCO_String signature;
+//    POCO_proxy_t proxy;
+//    POCO_String filename;
+//    POCO_String proxy_name;
+//
+//    POCO_String key;
 };
 
 static POCO_Hashtable&
@@ -160,13 +169,12 @@ pocomatic_register_proxy::pocomatic_register_proxy(int kind,
     desc->key += "@";
     desc->key += bean_class_ptr;
 
-    //printf("registered method %s\n", desc->key.in());
-
-    table.put(desc->key.in(), desc);
+    table.put(desc->key.c_str(), desc);
 
     if (bean_class_ptr != NULL && bean_class_ptr[0] != 0 && kind == 0)
     {
-        pocomatic_register_proxy(0, NULL, factory_class_ptr, signature, proxy,
+        ///< Why calling second time??? Makes no sense so far
+        pocomatic_register_proxy(0, "", factory_class_ptr, signature, proxy,
                 filename, proxy_name);
     }
 }

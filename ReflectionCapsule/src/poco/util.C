@@ -38,6 +38,7 @@ char* POCO_Util::class_to_ptr(const char* class_name)
 		return NULL;
 	}
 
+	//Asterisks in name? Is it like operator* ?
 	if( trimed_name.in()[0] == '*' ) {
 		// removing "*" from head
 		trimed_name = trim_string(trimed_name.in() + 1);
@@ -71,9 +72,8 @@ char* POCO_Util::trim_string(const char* str)
 	}
 
 	int len = strlen(str);
-	int i;
-
 	// trim head space
+	int i;
 	for(i=0;i<len; i++) {
 		if( str[i] == ' ' || str[i] == '\t' ) {
 			continue;

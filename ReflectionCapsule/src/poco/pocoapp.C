@@ -39,7 +39,7 @@ POCO_AppContext::create(const char* desc, const char* type, POCO_AppEnv* env)
 		return POCO_AppContextImpl::create_from_string(desc, env);
 	}
 
-	POCO_String msg = (const char*)"[E101] Unknow descriptor source type: \"";
+	POCO_String msg = (const char*)"[E101] Unknown descriptor source type: \"";
 	msg += type;
 	msg += "\"";
 	env->fatal_error(msg.in());

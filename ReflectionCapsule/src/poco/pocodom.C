@@ -44,6 +44,7 @@ const char* POCO_DOM_Element::getTagName()
 
 const char* POCO_DOM_Element::getAttribute(const char* attr)
 {
+    // Could have use something else than linear strcmp
 	for(int i=0; i<num_attrs; i++) {
 		if( strcmp(attrs[i]->name.in(), attr) == 0 ) {
 			return attrs[i]->value.in();
